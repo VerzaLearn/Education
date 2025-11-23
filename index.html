@@ -1,63 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VerzaLearning - The Future of Interactive Education</title>
-    <!-- Load Inter font for modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for the Discord icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerzaLearning - The Future of Interactive Education</title>
+    <!-- Load Inter font for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for the Discord icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Minimal CSS for layout and modals */
+        body { font-family: 'Inter', sans-serif; margin: 0; }
+        .hero-screen { min-height: 80vh; padding: 50px 20px; text-align: center; }
+        .cta-btn { padding: 10px 20px; margin: 5px; border-radius: 8px; cursor: pointer; border: 1px solid #ccc; background: #fff; }
+        .primary-btn { background-color: #4CAF50; color: white; border: none; }
+        .secondary-btn { background-color: #ccc; color: #333; }
+        .discord-btn { background-color: #7289DA; color: white; border: none; }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .modal-content.success {
+            background-color: #E8F5E9; 
+            border: 2px solid #4CAF50;
+        }
+        .modal-content.error {
+            background-color: #FFEFEF; 
+            border: 2px solid #D32F2F;
+            color: #D32F2F;
+        }
+        .modal-content.error button.primary-btn {
+            background-color: #D32F2F;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 1. Full-Screen Hero Section (The Main Landing View) -->
-    <section class="hero-screen">
-        <header class="main-header">
-            <div class="logo">VERZA</div>
-            <nav class="hero-nav">
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-            </nav>
-        </header>
+    <!-- 1. Full-Screen Hero Section (The Main Landing View) -->
+    <section class="hero-screen">
+        <header class="main-header">
+            <div class="logo">VERZA</div>
+            <nav class="hero-nav">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+            </nav>
+        </header>
 
-        <div class="hero-content-center">
-            <h1>The Future of Interactive Education is Here.</h1>
-            <p class="tagline">Unleash powerful, personalized learning games and watch student engagement soar.</p>
-            
-            <div class="cta-group">
-                <button class="cta-btn primary-btn">Sign Up</button>
-                <button class="cta-btn secondary-btn">Log In</button>
-                <button class="cta-btn discord-btn">
-                    <i class="fab fa-discord"></i> Join Discord
-                </button>
-            </div>
+        <div class="hero-content-center">
+            <h1>The Future of Interactive Education is Here.</h1>
+            <p class="tagline">Unleash powerful, personalized learning games and watch student engagement soar.</p>
+            
+            <div class="cta-group">
+                <button class="cta-btn primary-btn" id="signupBtn">Sign Up</button>
+                <button class="cta-btn secondary-btn">Log In</button>
+                <button class="cta-btn discord-btn">
+                    <i class="fab fa-discord"></i> Join Discord
+                </button>
+            </div>
+        </div>
+
+        <!-- Animated Shapes Overlay - these replace the "blooks" -->
+        <div class="animated-shapes">
+            <!-- Shapes are generated and animated purely by CSS/JS -->
+        </div>
+
+    </section>
+
+    <!-- 2. Scrolling Feature/Explainer Section (Replacing Blooket's scrolling section) -->
+    <section class="feature-scroll-section" id="features">
+        <div class="feature-card">
+            <h2 class="section-title">Engage Every Student.</h2>
+            <p class="section-subtitle">Turn dull topics into competitive, collaborative, and rewarding games instantly.</p>
+        </div>
+
+        <div class="feature-card alt-bg">
+            <h2 class="section-title">Auto-Grading</h2>
+            <p class="section-subtitle"></p>
+        </div>
+
+        <div class="feature-card">
+            <h2 class="section-title">Track Mastery!</h2>
+            <p class="section-subtitle">Advanced analytics show you exactly where students succeed and where they need help.</p>
+        </div>
+    </section>
+
+
+    <!-- MODAL 1: Sign Up Form -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="modal-content">
+            <h2>Create Your Verza Account</h2>
+            <input type="email" id="signupEmail" placeholder="Enter G-Mail address" required>
+            <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)" required>
+            <button class="primary-btn" id="sendVerificationBtn">Sign Up & Send Verification Link</button>
+            <button class="secondary-btn" onclick="closeModal('signupModal')">Cancel</button>
         </div>
+    </div>
 
-        <!-- Animated Shapes Overlay - these replace the "blooks" -->
-        <div class="animated-shapes">
-            <!-- Shapes are generated and animated purely by CSS/JS -->
+    <!-- MODAL 2: Email Verification Check -->
+    <div class="modal-overlay" id="verificationCheckModal">
+        <div class="modal-content">
+            <h2>Verification Pending</h2>
+            <p id="verificationMessage">
+                A verification link has been sent to your G-Mail.
+                Please **open your email and click the link** to verify your address.
+            </p>
+            <p class="mt-4 text-sm text-gray-500">
+                (After clicking the link in your email)
+            </p>
+            <button class="primary-btn" id="checkVerificationBtn">I Verified (Check Status)</button>
+            <button class="secondary-btn" onclick="closeModal('verificationCheckModal')">Cancel</button>
         </div>
+    </div>
 
-    </section>
-
-    <!-- 2. Scrolling Feature/Explainer Section (Replacing Blooket's scrolling section) -->
-    <section class="feature-scroll-section" id="features">
-        <div class="feature-card">
-            <h2 class="section-title">Engage Every Student.</h2>
-            <p class="section-subtitle">Turn dull topics into competitive, collaborative, and rewarding games instantly.</p>
+    <!-- MODAL 3: Success -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content success">
+            <h2>Verification Complete!</h2>
+            <p>You have successfully verified your account and are ready to log in.</p>
+            <button class="primary-btn" onclick="closeModal('successModal')">Close</button>
         </div>
+    </div>
 
-        <div class="feature-card alt-bg">
-            <h2 class="section-title">Create Anything.</h2>
-            <p class="section-subtitle">Build customized learning sets in minutes or use thousands of pre-made templates.</p>
+    <!-- MODAL 4: Error -->
+    <div class="modal-overlay" id="errorModal">
+        <div class="modal-content error">
+            <h2>Error</h2>
+            <p id="errorMessage">An unknown error occurred.</p>
+            <button class="primary-btn" onclick="closeModal('errorModal')">OK</button>
         </div>
+    </div>
 
-        <div class="feature-card">
-            <h2 class="section-title">Track Mastery.</h2>
-            <p class="section-subtitle">Advanced analytics show you exactly where students succeed and where they need help.</p>
-        </div>
-    </section>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { 
+    getAuth, 
+    signInAnonymously, 
+    signInWithCustomToken, 
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    reload
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { 
+    getFirestore,
+    setLogLevel
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+
+/**
+ * Application Global Constants and Firebase Setup
+ */
+const DISCORD_URL = 'https://discord.gg/8KqKKt5xBh';
+let app, db, auth;
+let currentSignedUpUser = null; // Store the user object after signup
+
+
+/**
+ * Helper function to open a modal
+ */
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+/**
+ * Helper function to close a modal
+ */
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+        // Clear inputs on close for fresh start
+        if (modalId === 'signupModal') {
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+        }
+    }
+}
+
+/**
+ * Helper function to display an error modal
+ * @param {string} message - The error message to display
+ */
+function displayError(message) {
+    const errorMsgElement = document.getElementById('errorMessage');
+    if (errorMsgElement) {
+        errorMsgElement.textContent = message;
+    }
+    closeModal('signupModal'); // Close any other modals
+    closeModal('verificationCheckModal');
+    openModal('errorModal');
+}
+
+/**
+ * Initialize Firebase and authenticate the user (mandatory for all Firebase apps)
+ */
+async function initializeFirebase() {
+    try {
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        if (!firebaseConfig || Object.keys(firebaseConfig).length === 0) {
+            console.error("Firebase configuration is missing or empty.");
+            return;
+        }
+
+        setLogLevel('debug');
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        if (initialAuthToken) {
+            await signInWithCustomToken(auth, initialAuthToken);
+            console.log("Signed in with custom token.");
+        } else {
+            await signInAnonymously(auth);
+            console.log("Signed in anonymously.");
+        }
+    } catch (error) {
+        console.error("Firebase initialization or sign-in failed:", error);
+    }
+}
+
+
+/**
+ * Main application logic, attached after the page loads.
+ */
+window.onload = async function() {
+    await initializeFirebase();
+
+    // ----------------------------------------
+    // A. Discord Button Handler (Existing Logic)
+    // ----------------------------------------
+    const discordButton = document.querySelector('.discord-btn'); 
+    if (discordButton) {
+        discordButton.addEventListener('click', function() {
+            window.open(DISCORD_URL, '_blank');
+        });
+    }
+
+    // ----------------------------------------
+    // B. Sign Up Button Handler (Open Modal)
+    // ----------------------------------------
+    const signupBtn = document.getElementById('signupBtn');
+    if (signupBtn) {
+        signupBtn.addEventListener('click', function() {
+            openModal('signupModal');
+        });
+    }
+
+    // ----------------------------------------
+    // C. Send Verification Button Handler (Stage 1 to Stage 2)
+    // ----------------------------------------
+    const sendVerificationBtn = document.getElementById('sendVerificationBtn');
+    if (sendVerificationBtn) {
+        sendVerificationBtn.addEventListener('click', async function() {
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (email.length > 5 && password.length >= 6 && email.includes('@')) {
+                try {
+                    // 1. Create User
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    currentSignedUpUser = userCredential.user;
+                    console.log("User created:", currentSignedUpUser.uid);
+                    
+                    // 2. Send Verification Email
+                    await sendEmailVerification(currentSignedUpUser);
+                    console.log("Verification email sent.");
+
+                    // 3. Move to Verification Check Stage
+                    closeModal('signupModal');
+                    openModal('verificationCheckModal');
+
+                } catch (error) {
+                    // Handle errors like 'email already in use' or weak password
+                    console.error("Signup failed:", error);
+                    let message = "Signup failed. Please check the email format or password strength (min 6 chars).";
+                    if (error.code === 'auth/email-already-in-use') {
+                        message = "This email address is already in use. Try logging in or resetting your password.";
+                    } else if (error.code === 'auth/weak-password') {
+                        message = "Password is too weak. Please choose a stronger password.";
+                    }
+                    displayError(message);
+                }
+            } else {
+                displayError('Please enter a valid G-Mail address and a password of at least 6 characters.');
+            }
+        });
+    }
+
+    // ----------------------------------------
+    // D. Check Verification Status Button Handler (Stage 2 to Stage 3)
+    // ----------------------------------------
+    const checkVerificationBtn = document.getElementById('checkVerificationBtn');
+    if (checkVerificationBtn) {
+        checkVerificationBtn.addEventListener('click', async function() {
+            if (!currentSignedUpUser) {
+                displayError("No user session found. Please try signing up again.");
+                closeModal('verificationCheckModal');
+                return;
+            }
+
+            try {
+                // Fetch the latest user data from Firebase
+                await reload(currentSignedUpUser);
+                const reloadedUser = auth.currentUser;
+
+                if (reloadedUser && reloadedUser.emailVerified) {
+                    // Verification is complete!
+                    closeModal('verificationCheckModal');
+                    openModal('successModal');
+                    console.log("Verification successful and email verified!");
+                    
+                    // The user is now signed in. We can leave them signed in
+                    // or force a sign out for a fresh login experience later.
+                    // For now, let's keep them signed in.
+
+                } else {
+                    // Verification is still pending
+                    displayError("Verification is still pending. Did you click the link in your G-Mail?");
+                }
+            } catch (error) {
+                console.error("Error during verification check:", error);
+                displayError("Could not check verification status. Please ensure you are connected to the internet.");
+            }
+        });
+    }
+
+};
+
+</script>
 </body>
 </html>

@@ -10,13 +10,201 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Minimal CSS for layout and modals */
-        body { font-family: 'Inter', sans-serif; margin: 0; }
-        .hero-screen { min-height: 80vh; padding: 50px 20px; text-align: center; }
-        .cta-btn { padding: 10px 20px; margin: 5px; border-radius: 8px; cursor: pointer; border: 1px solid #ccc; background: #fff; }
-        .primary-btn { background-color: #4CAF50; color: white; border: none; }
-        .secondary-btn { background-color: #ccc; color: #333; }
-        .discord-btn { background-color: #7289DA; color: white; border: none; }
+        /* ------------------------------------------------------------------- */
+        /* --- GIMKIT STYLE OVERHAUL (Custom Green Gradient Background) --- */
+        /* ------------------------------------------------------------------- */
+
+        /* Core Styling */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            /* Use a gradient matching the uploaded image for the background */
+            background: linear-gradient(180deg, #A8F08C 0%, #FFFFFF 100%);
+            color: #1a202c; /* Dark text for contrast */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* 1. HEADER / NAVIGATION (Clean, Elevated Look) */
+        /* ------------------------------------------------------------------- */
+
+        .main-header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Gimkit style: White floating header */
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            margin-top: 15px; /* Floating look */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #4CAF50; /* A darker shade of the theme green */
+            letter-spacing: -0.05em;
+        }
+
+        .hero-nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 1.5rem;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        .hero-nav a:hover {
+            color: #1a202c;
+        }
+
+
+        /* ------------------------------------------------------------------- */
+        /* 2. HERO SECTION (Centered Content, High Contrast) */
+        /* ------------------------------------------------------------------- */
+
+        .hero-screen { 
+            min-height: 70vh; 
+            padding: 50px 20px; 
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px; /* Constrain content width */
+        }
+        
+        .hero-content-center {
+            margin-top: 80px; /* Space from header */
+        }
+
+        .hero-screen h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #4a5568;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* 3. CTA BUTTONS (Gimkit Button Style - Rounded, Punchy) */
+        /* ------------------------------------------------------------------- */
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap; /* Responsive wrapping */
+        }
+
+        .cta-btn { 
+            padding: 12px 28px; 
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 10px; /* More rounded */
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1); /* Subtle shadow lift */
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.1);
+        }
+
+        .primary-btn { 
+            background-color: #7289DA; /* Purple/Blue accent color */
+            color: white; 
+            border: none; 
+            box-shadow: 0 5px 0 #596aae; /* Darker blue shade for press effect */
+        }
+        
+        .primary-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #596aae; 
+        }
+
+        .secondary-btn { 
+            background-color: #ffffff; 
+            color: #4a5568; 
+            border: 2px solid #cbd5e0;
+            box-shadow: none; /* Secondary is flat */
+        }
+        
+        .discord-btn { 
+            background-color: #7289DA; 
+            color: white; 
+            border: none;
+            box-shadow: 0 5px 0 #596aae;
+        }
+        
+        .discord-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #596aae;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* 4. FEATURE SCROLL SECTION (Clean Cards) */
+        /* ------------------------------------------------------------------- */
+
+        .feature-scroll-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #4CAF50; /* Green accent strip */
+        }
+        
+        /* Alternate background for visual break */
+        .feature-card.alt-bg {
+            background-color: #f7fafc; 
+            border-left: 5px solid #7289DA; /* Blue accent strip */
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* 5. MODAL STYLING (Gimkit Style - Rounded, Clean) */
+        /* ------------------------------------------------------------------- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -32,21 +220,31 @@
         .modal-content {
             background: white;
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 16px; /* More rounded corners */
             width: 90%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 1px solid #e2e8f0;
         }
         .modal-content h2 {
+            font-weight: 800;
+            color: #1a202c;
             margin-bottom: 20px;
         }
         .modal-content input {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #f7fafc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .modal-content input:focus {
+            border-color: #7289DA;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.2);
         }
         .modal-content button {
             padding: 10px 20px;
@@ -58,17 +256,67 @@
             transition: background-color 0.2s;
         }
         .modal-content.success {
-            background-color: #E8F5E9; 
+            background-color: #E8F5E9; /* Light Green */
             border: 2px solid #4CAF50;
+            color: #4CAF50;
+        }
+        .modal-content.success h2 {
+            color: #4CAF50;
         }
         .modal-content.error {
-            background-color: #FFEFEF; 
+            background-color: #FFEFEF; /* Light Red */
             border: 2px solid #D32F2F;
+            color: #D32F2F;
+        }
+        .modal-content.error h2 {
             color: #D32F2F;
         }
         .modal-content.error button.primary-btn {
             background-color: #D32F2F;
+            box-shadow: 0 5px 0 #9a2020;
         }
+        .modal-content.error button.primary-btn:active {
+            box-shadow: 0 2px 0 #9a2020;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* 6. RESPONSIVENESS */
+        /* ------------------------------------------------------------------- */
+
+        @media (max-width: 640px) {
+            .main-header {
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0;
+                margin-top: 0;
+            }
+            .hero-nav {
+                margin-top: 10px;
+            }
+            .hero-nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+            .hero-screen h1 {
+                font-size: 2rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .cta-btn {
+                width: 80%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -94,6 +342,7 @@
                     <i class="fab fa-discord"></i> Join Discord
                 </button>
             </div>
+
         </div>
 
         <!-- Animated Shapes Overlay - these replace the "blooks" -->
@@ -106,17 +355,17 @@
     <!-- 2. Scrolling Feature/Explainer Section (Replacing Blooket's scrolling section) -->
     <section class="feature-scroll-section" id="features">
         <div class="feature-card">
-            <h2 class="section-title">Engage Every Student.</h2>
+            <h2 class="section-title">Engage Every Student. </h2>
             <p class="section-subtitle">Turn dull topics into competitive, collaborative, and rewarding games instantly.</p>
         </div>
 
         <div class="feature-card alt-bg">
-            <h2 class="section-title">Auto-Grading</h2>
-            <p class="section-subtitle"></p>
+            <h2 class="section-title">Create Anything.</h2>
+            <p class="section-subtitle">Build customized learning sets in minutes or use thousands of pre-made templates.</p>
         </div>
 
         <div class="feature-card">
-            <h2 class="section-title">Track Mastery!</h2>
+            <h2 class="section-title">Track Mastery.  </h2>
             <p class="section-subtitle">Advanced analytics show you exactly where students succeed and where they need help.</p>
         </div>
     </section>
@@ -125,7 +374,7 @@
     <!-- MODAL 1: Sign Up Form -->
     <div class="modal-overlay" id="signupModal">
         <div class="modal-content">
-            <h2>Create Your Verza Account</h2>
+            <h2>Create Your Verza Account </h2>
             <input type="email" id="signupEmail" placeholder="Enter G-Mail address" required>
             <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)" required>
             <button class="primary-btn" id="sendVerificationBtn">Sign Up & Send Verification Link</button>
@@ -136,7 +385,7 @@
     <!-- MODAL 2: Email Verification Check -->
     <div class="modal-overlay" id="verificationCheckModal">
         <div class="modal-content">
-            <h2>Verification Pending</h2>
+            <h2>Verification Pending </h2>
             <p id="verificationMessage">
                 A verification link has been sent to your G-Mail.
                 Please **open your email and click the link** to verify your address.
@@ -161,7 +410,7 @@
     <!-- MODAL 4: Error -->
     <div class="modal-overlay" id="errorModal">
         <div class="modal-content error">
-            <h2>Error</h2>
+            <h2>Error </h2>
             <p id="errorMessage">An unknown error occurred.</p>
             <button class="primary-btn" onclick="closeModal('errorModal')">OK</button>
         </div>
@@ -218,7 +467,7 @@ function closeModal(modalId) {
 }
 
 /**
- * Helper function to display an error modal
+ * Helper function to display an error modal with specific messages
  * @param {string} message - The error message to display
  */
 function displayError(message) {
@@ -226,7 +475,7 @@ function displayError(message) {
     if (errorMsgElement) {
         errorMsgElement.textContent = message;
     }
-    closeModal('signupModal'); // Close any other modals
+    closeModal('signupModal'); 
     closeModal('verificationCheckModal');
     openModal('errorModal');
 }
@@ -239,9 +488,12 @@ async function initializeFirebase() {
         const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
         
+        // This check is important: if config is missing, initializeApp will fail,
+        // leaving global 'app' and 'auth' undefined, leading to the reported error.
         if (!firebaseConfig || Object.keys(firebaseConfig).length === 0) {
-            console.error("Firebase configuration is missing or empty.");
-            return;
+            console.error("Firebase configuration is missing or empty. Cannot initialize app.");
+            // If we return here, auth remains undefined, which triggers the custom error in the click handlers. This is correct.
+            return; 
         }
 
         setLogLevel('debug');
@@ -258,6 +510,7 @@ async function initializeFirebase() {
         }
     } catch (error) {
         console.error("Firebase initialization or sign-in failed:", error);
+        // If an error occurs here (e.g., config is malformed JSON), auth remains undefined, triggering the custom error. This is also correct.
     }
 }
 
@@ -294,37 +547,58 @@ window.onload = async function() {
     const sendVerificationBtn = document.getElementById('sendVerificationBtn');
     if (sendVerificationBtn) {
         sendVerificationBtn.addEventListener('click', async function() {
-            const email = document.getElementById('signupEmail').value;
+            // CRITICAL CHECK: If auth is undefined because Firebase config failed to load, show the custom error.
+            if (!auth) {
+                displayError("App setup failed. The required Firebase services could not load. Please contact support.");
+                return;
+            }
+
+            const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
 
-            if (email.length > 5 && password.length >= 6 && email.includes('@')) {
-                try {
-                    // 1. Create User
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    currentSignedUpUser = userCredential.user;
-                    console.log("User created:", currentSignedUpUser.uid);
-                    
-                    // 2. Send Verification Email
-                    await sendEmailVerification(currentSignedUpUser);
-                    console.log("Verification email sent.");
+            // Client-side validation for quick feedback
+            if (password.length < 6) {
+                displayError('Your password must be at least 6 characters long.');
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                displayError('Please enter a valid email address (e.g., user@gmail.com).');
+                return;
+            }
 
-                    // 3. Move to Verification Check Stage
-                    closeModal('signupModal');
-                    openModal('verificationCheckModal');
+            try {
+                // 1. Create User 
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                currentSignedUpUser = userCredential.user;
+                console.log("User created:", currentSignedUpUser.uid);
+                
+                // 2. Send Verification Email
+                await sendEmailVerification(currentSignedUpUser);
+                console.log("Verification email sent.");
 
-                } catch (error) {
-                    // Handle errors like 'email already in use' or weak password
-                    console.error("Signup failed:", error);
-                    let message = "Signup failed. Please check the email format or password strength (min 6 chars).";
-                    if (error.code === 'auth/email-already-in-use') {
-                        message = "This email address is already in use. Try logging in or resetting your password.";
-                    } else if (error.code === 'auth/weak-password') {
-                        message = "Password is too weak. Please choose a stronger password.";
-                    }
-                    displayError(message);
+                // 3. Move to Verification Check Stage
+                closeModal('signupModal');
+                openModal('verificationCheckModal');
+
+            } catch (error) {
+                console.error("Firebase Signup failed:", error);
+                let message = "An unexpected error occurred during signup. Check the console for details.";
+
+                // More descriptive error messages based on Firebase codes
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        message = "This email address is already registered. Please try logging in instead.";
+                        break;
+                    case 'auth/weak-password':
+                        message = "The password is too weak. It must be at least 6 characters long.";
+                        break;
+                    case 'auth/invalid-email':
+                        message = "The email address provided is not in a valid format (e.g., missing @ or domain).";
+                        break;
+                    default:
+                        message = `Signup failed: ${error.message}`;
                 }
-            } else {
-                displayError('Please enter a valid G-Mail address and a password of at least 6 characters.');
+                displayError(message);
             }
         });
     }
@@ -335,8 +609,14 @@ window.onload = async function() {
     const checkVerificationBtn = document.getElementById('checkVerificationBtn');
     if (checkVerificationBtn) {
         checkVerificationBtn.addEventListener('click', async function() {
+            // CRITICAL CHECK: If auth is undefined because Firebase config failed to load, show the custom error.
+            if (!auth) {
+                displayError("App setup failed. The required Firebase services could not load. Please contact support.");
+                return;
+            }
+
             if (!currentSignedUpUser) {
-                displayError("No user session found. Please try signing up again.");
+                displayError("No active sign-up session found. Please try signing up again.");
                 closeModal('verificationCheckModal');
                 return;
             }
@@ -351,14 +631,9 @@ window.onload = async function() {
                     closeModal('verificationCheckModal');
                     openModal('successModal');
                     console.log("Verification successful and email verified!");
-                    
-                    // The user is now signed in. We can leave them signed in
-                    // or force a sign out for a fresh login experience later.
-                    // For now, let's keep them signed in.
-
                 } else {
                     // Verification is still pending
-                    displayError("Verification is still pending. Did you click the link in your G-Mail?");
+                    displayError("Verification is still pending. Did you click the link in your G-Mail? You might need to wait a moment for the status to update.");
                 }
             } catch (error) {
                 console.error("Error during verification check:", error);

@@ -1,380 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VerzaLearning - The Future of Interactive Education</title>
-    <!-- Load Inter font for modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for the Discord icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerzaLearning - The Future of Interactive Education</title>
+    <!-- Load Inter font for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for the Discord icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <style>
-        /* ------------------------------------------------------------------- */
-        /* --- GIMKIT STYLE OVERHAUL (Custom Green Gradient Background) --- */
-        /* ------------------------------------------------------------------- */
-
-        /* Core Styling */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            /* Use a gradient matching the uploaded image for the background */
-            background: linear-gradient(180deg, #A8F08C 0%, #FFFFFF 100%);
-            color: #1a202c; /* Dark text for contrast */
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* ------------------------------------------------------------------- */
-        /* 1. HEADER / NAVIGATION (Clean, Elevated Look) */
-        /* ------------------------------------------------------------------- */
-
-        .main-header {
-            width: 100%;
-            max-width: 1200px;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* Gimkit style: White floating header */
-            background-color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            border-radius: 12px;
-            margin-top: 15px; /* Floating look */
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #4CAF50; /* A darker shade of the theme green */
-            letter-spacing: -0.05em;
-        }
-
-        .hero-nav a {
-            color: #4a5568;
-            text-decoration: none;
-            font-weight: 600;
-            margin-left: 1.5rem;
-            padding: 0.5rem 0;
-            transition: color 0.2s;
-        }
-
-        .hero-nav a:hover {
-            color: #1a202c;
-        }
-
-
-        /* ------------------------------------------------------------------- */
-        /* 2. HERO SECTION (Centered Content, High Contrast) */
-        /* ------------------------------------------------------------------- */
-
-        .hero-screen { 
-            min-height: 70vh; 
-            padding: 50px 20px; 
-            text-align: center; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px; /* Constrain content width */
-        }
-        
-        .hero-content-center {
-            margin-top: 80px; /* Space from header */
-        }
-
-        .hero-screen h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            color: #1a202c;
-        }
-
-        .tagline {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: #4a5568;
-            margin-bottom: 2.5rem;
-            font-weight: 400;
-        }
-
-        /* ------------------------------------------------------------------- */
-        /* 3. CTA BUTTONS (Gimkit Button Style - Rounded, Punchy) */
-        /* ------------------------------------------------------------------- */
-
-        .cta-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap; /* Responsive wrapping */
-        }
-
-        .cta-btn { 
-            padding: 12px 28px; 
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 10px; /* More rounded */
-            cursor: pointer;
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1); /* Subtle shadow lift */
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 rgba(0,0,0,0.1);
-        }
-
-        .primary-btn { 
-            background-color: #7289DA; /* Purple/Blue accent color */
-            color: white; 
-            border: none; 
-            box-shadow: 0 5px 0 #596aae; /* Darker blue shade for press effect */
-        }
-        
-        .primary-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #596aae; 
-        }
-
-        .secondary-btn { 
-            background-color: #ffffff; 
-            color: #4a5568; 
-            border: 2px solid #cbd5e0;
-            box-shadow: none; /* Secondary is flat */
-        }
-        
-        .discord-btn { 
-            background-color: #7289DA; 
-            color: white; 
-            border: none;
-            box-shadow: 0 5px 0 #596aae;
-        }
-        
-        .discord-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #596aae;
-        }
-
-        /* ------------------------------------------------------------------- */
-        /* 4. FEATURE SCROLL SECTION (Clean Cards) */
-        /* ------------------------------------------------------------------- */
-
-        .feature-scroll-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            gap: 30px;
-        }
-
-        .feature-card {
-            background-color: white;
-            border-radius: 16px;
-            padding: 40px;
-            width: 100%;
-            max-width: 800px;
-            text-align: left;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #4CAF50; /* Green accent strip */
-        }
-        
-        /* Alternate background for visual break */
-        .feature-card.alt-bg {
-            background-color: #f7fafc; 
-            border-left: 5px solid #7289DA; /* Blue accent strip */
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: #718096;
-        }
-
-        /* ------------------------------------------------------------------- */
-        /* 5. MODAL STYLING (Gimkit Style - Rounded, Clean) */
-        /* ------------------------------------------------------------------- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 16px; /* More rounded corners */
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            border: 1px solid #e2e8f0;
-        }
-        .modal-content h2 {
-            font-weight: 800;
-            color: #1a202c;
-            margin-bottom: 20px;
-        }
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            background-color: #f7fafc;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .modal-content input:focus {
-            border-color: #7289DA;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.2);
-        }
-        .modal-content button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .modal-content.success {
-            background-color: #E8F5E9; /* Light Green */
-            border: 2px solid #4CAF50;
-            color: #4CAF50;
-        }
-        .modal-content.success h2 {
-            color: #4CAF50;
-        }
-        .modal-content.error {
-            background-color: #FFEFEF; /* Light Red */
-            border: 2px solid #D32F2F;
-            color: #D32F2F;
-        }
-        .modal-content.error h2 {
-            color: #D32F2F;
-        }
-        .modal-content.error button.primary-btn {
-            background-color: #D32F2F;
-            box-shadow: 0 5px 0 #9a2020;
-        }
-        .modal-content.error button.primary-btn:active {
-            box-shadow: 0 2px 0 #9a2020;
-        }
-
-        /* ------------------------------------------------------------------- */
-        /* 6. RESPONSIVENESS */
-        /* ------------------------------------------------------------------- */
-
-        @media (max-width: 640px) {
-            .main-header {
-                flex-direction: column;
-                padding: 1rem;
-                border-radius: 0;
-                margin-top: 0;
-            }
-            .hero-nav {
-                margin-top: 10px;
-            }
-            .hero-nav a {
-                margin: 0 0.5rem;
-                font-size: 0.9rem;
-            }
-            .hero-screen h1 {
-                font-size: 2rem;
-            }
-            .tagline {
-                font-size: 1rem;
-            }
-            .cta-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .cta-btn {
-                width: 80%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            .feature-card {
-                padding: 25px;
-            }
-        }
-
-    </style>
+    <!-- IMPORTANT: Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css"> 
+    
 </head>
 <body>
 
-    <!-- 1. Full-Screen Hero Section (The Main Landing View) -->
-    <section class="hero-screen">
-        <header class="main-header">
-            <div class="logo">VERZA</div>
-            <nav class="hero-nav">
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-            </nav>
-        </header>
+    <!-- 1. Full-Screen Hero Section (The Main Landing View) -->
+    <section class="hero-screen">
+        <header class="main-header">
+            <div class="logo">VERZA</div>
+            <nav class="hero-nav">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+            </nav>
+        </header>
 
-        <div class="hero-content-center">
-            <h1>The Future of Interactive Education is Here</h1>
-            <p class="tagline">Unleash powerful, personalized learning games and watch student engagement soar</p>
-            
-            <div class="cta-group">
-                <button class="cta-btn primary-btn" id="signupBtn">Sign Up</button>
-                <button class="cta-btn secondary-btn">Log In</button>
-                <button class="cta-btn discord-btn">
-                    <i class="fab fa-discord"></i> Join Discord
-                </button>
-            </div>
+        <div class="hero-content-center">
+            <h1>The Future of Interactive Education is Here</h1>
+            <p class="tagline">Unleash powerful, personalized learning games and watch student engagement soar</p>
+            
+            <div class="cta-group">
+                <button class="cta-btn primary-btn" id="signupBtn">Sign Up</button>
+                <button class="cta-btn secondary-btn">Log In</button>
+                <button class="cta-btn discord-btn">
+                    <i class="fab fa-discord"></i> Join Discord
+                </button>
+            </div>
 
-        </div>
+        </div>
 
-        <!-- Animated Shapes Overlay - these replace the "blooks" -->
-        <div class="animated-shapes">
-            <!-- Shapes are generated and animated purely by CSS/JS -->
-        </div>
+        <!-- Animated Shapes Overlay - these replace the "blooks" -->
+        <div class="animated-shapes">
+            <!-- Shapes are generated and animated purely by CSS/JS -->
+        </div>
 
-    </section>
+    </section>
 
-    <!-- 2. Scrolling Feature/Explainer Section (Replacing Blooket's scrolling section) -->
-    <section class="feature-scroll-section" id="features">
-        <div class="feature-card">
-            <h2 class="section-title">Engage Every Student </h2>
-            <p class="section-subtitle">Turn dull topics into competitive, collaborative, and rewarding games instantly!</p>
-        </div>
+    <!-- 2. Scrolling Feature/Explainer Section (Replacing Blooket's scrolling section) -->
+    <section class="feature-scroll-section" id="features">
+        <div class="feature-card">
+            <h2 class="section-title">Engage Every Student </h2>
+            <p class="section-subtitle">Turn dull topics into competitive, collaborative, and rewarding games instantly!</p>
+        </div>
 
-        <div class="feature-card alt-bg">
-            <h2 class="section-title">Auto-Grading</h2>
-            <p class="section-subtitle">Use our auto-grading systems as an educator so you don't have to do the dirty work!</p>
-        </div>
+        <div class="feature-card alt-bg">
+            <h2 class="section-title">Auto-Grading</h2>
+            <p class="section-subtitle">Use our auto-grading systems as an educator so you don't have to do the dirty work!</p>
+        </div>
 
-        <div class="feature-card">
-            <h2 class="section-title">Track Mastery  </h2>
-            <p class="section-subtitle">Advanced analytics show you exactly where students succeed and where they need help!</p>
-        </div>
-    </section>
+        <div class="feature-card">
+            <h2 class="section-title">Track Mastery  </h2>
+            <p class="section-subtitle">Advanced analytics show you exactly where students succeed and where they need help!</p>
+        </div>
+    </section>
 
 
     <!-- MODAL 1: Sign Up Form -->
     <div class="modal-overlay" id="signupModal">
         <div class="modal-content">
-            <h2>Create Your Verza Account </h2>
+            <h2>Create Your Verza Account </h2>
             <input type="email" id="signupEmail" placeholder="Enter G-Mail address" required>
             <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)" required>
             <button class="primary-btn" id="sendVerificationBtn">Sign Up & Send Verification Link</button>
@@ -385,7 +79,7 @@
     <!-- MODAL 2: Email Verification Check -->
     <div class="modal-overlay" id="verificationCheckModal">
         <div class="modal-content">
-            <h2>Verification Pending </h2>
+            <h2>Verification Pending </h2>
             <p id="verificationMessage">
                 A verification link has been sent to your G-Mail.
                 Please **open your email and click the link** to verify your address.
@@ -410,7 +104,7 @@
     <!-- MODAL 4: Error -->
     <div class="modal-overlay" id="errorModal">
         <div class="modal-content error">
-            <h2>Error </h2>
+            <h2>Error </h2>
             <p id="errorMessage">An unknown error occurred.</p>
             <button class="primary-btn" onclick="closeModal('errorModal')">OK</button>
         </div>
